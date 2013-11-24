@@ -1,0 +1,27 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "StoryModel",
+        "idProperty": "element"
+    },
+    "designerId": "95f28eee-ef77-4def-8cc6-cc83ae31cd36",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "name"
+            },
+            "designerId": "c1446198-bcfe-412d-9193-fe94bf3045b5"
+        }
+    ]
+}

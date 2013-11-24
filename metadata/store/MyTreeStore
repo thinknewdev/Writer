@@ -1,0 +1,43 @@
+{
+    "type": "Ext.data.TreeStore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "MyTreeStore",
+        "model": "StoryModel",
+        "storeId": "MyTreeStore"
+    },
+    "designerId": "2cf8fa7d-fce5-430c-bd8b-cbfc33e910df",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "data/solitude.json"
+            },
+            "designerId": "9a0aec0a-a832-413b-ab2a-cd25ad15df7d",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "root": "Root"
+                    },
+                    "designerId": "fa57142c-1b27-4a2c-a41e-b4f1338a9e69"
+                }
+            ]
+        }
+    ]
+}
