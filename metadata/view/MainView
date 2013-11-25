@@ -40,6 +40,90 @@
                         "height": 150
                     },
                     "designerId": "6d66d23f-d3b3-4ffa-9f51-33bd3f688c62"
+                },
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dock": "top",
+                        "width": 400
+                    },
+                    "designerId": "a8b40e9d-bca3-411e-82f7-53f1ba94aa3d",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "MyButton"
+                            },
+                            "designerId": "cdb359e7-1366-4df6-8a30-58a148b40cab",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onButtonClick",
+                                        "implHandler": [
+                                            "var treeNode = projectTree.getRootNode();\r",
+                                            "treeNode.expandChildren(true); // Optional: To see what happens\r",
+                                            "treeNode.appendChild({\r",
+                                            "        name: 'Child 4',\r",
+                                            "        leaf: true,\r",
+                                            "        element : 6\r",
+                                            "});\r",
+                                            "treeNode.getChildAt(2).getChildAt(0).appendChild({\r",
+                                            "        name: 'Grand Child 3',\r",
+                                            "        leaf: true,\r",
+                                            "        element: 7\r",
+                                            "});"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "5aca0b31-f70f-4631-840b-6e0f4450d5aa"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "MyButton"
+                            },
+                            "designerId": "14a70045-ea88-493b-9401-ac3c18f47e67"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "MyButton"
+                            },
+                            "designerId": "cbcf36b3-b32c-4f89-a652-43faf665db05"
+                        }
+                    ]
                 }
             ]
         },
@@ -51,7 +135,10 @@
             },
             "codeClass": null,
             "userConfig": {
+                "id": "projectTree",
+                "itemId": "projectTree",
                 "layout|region": "west",
+                "rootVisible": false,
                 "store": "MyTreeStore",
                 "title": "Organizer",
                 "width": 150
@@ -98,7 +185,9 @@
                     "codeClass": null,
                     "userConfig": {
                         "dataIndex": "name",
-                        "text": null
+                        "defaultWidth": 149,
+                        "text": null,
+                        "width": 148
                     },
                     "designerId": "1b23c8e2-4260-48e3-841b-66f4e0e675ec"
                 }

@@ -39,14 +39,44 @@ Ext.define('Writer.view.MainView', {
                             xtype: 'htmleditor',
                             height: 150
                         }
+                    ],
+                    dockedItems: [
+                        {
+                            xtype: 'toolbar',
+                            dock: 'top',
+                            width: 400,
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    text: 'MyButton',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'MyButton'
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'MyButton'
+                                }
+                            ]
+                        }
                     ]
                 },
                 {
                     xtype: 'treepanel',
                     region: 'west',
+                    id: 'projectTree',
+                    itemId: 'projectTree',
                     width: 150,
                     title: 'Organizer',
                     store: 'MyTreeStore',
+                    rootVisible: false,
                     viewConfig: {
                         listeners: {
                             select: {
@@ -58,6 +88,8 @@ Ext.define('Writer.view.MainView', {
                     columns: [
                         {
                             xtype: 'treecolumn',
+                            width: 148,
+                            defaultWidth: 149,
                             dataIndex: 'name'
                         }
                     ]
@@ -66,6 +98,21 @@ Ext.define('Writer.view.MainView', {
         });
 
         me.callParent(arguments);
+    },
+
+    onButtonClick: function(button, e, eOpts) {
+        var treeNode = projectTree.getRootNode();
+        treeNode.expandChildren(true); // Optional: To see what happens
+        treeNode.appendChild({
+                name: 'Child 4',
+                leaf: true,
+                element : 6
+        });
+        treeNode.getChildAt(2).getChildAt(0).appendChild({
+                name: 'Grand Child 3',
+                leaf: true,
+                element: 7
+        });
     },
 
     onViewSelect: function(dataviewmodel, record, eOpts) {

@@ -4,15 +4,15 @@
           {
             "name": "Chapters",
             "leaf": true,
-            "element": "1"
+            "element": 1
          },{
             "name": "Characters",
             "leaf": true,
-            "element": "2"
+            "element": 2
          },{
             "name": "Settings",
             "leaf": true,
-            "element": "3"
+            "element": 3
          }
     ]
 }
