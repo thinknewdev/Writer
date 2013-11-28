@@ -17,8 +17,26 @@
             "MyTreeStore"
         ],
         "views": [
-            "MainView"
+            "MainView",
+            "previewWindow"
         ]
     },
-    "designerId": "application"
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "71d7b063-538b-448f-a5a5-08ae05671c6b"
+        }
+    ]
 }

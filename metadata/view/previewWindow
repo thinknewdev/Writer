@@ -1,0 +1,18 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "previewWindow",
+        "height": 600,
+        "hidden": false,
+        "id": "previewWindow",
+        "layout": "fit",
+        "title": "My Window",
+        "width": 900
+    },
+    "designerId": "bf506b51-80eb-4d9c-99a2-30fd3f781cff"
+}

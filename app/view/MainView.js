@@ -53,7 +53,7 @@ Ext.define('Writer.view.MainView', {
                             items: [
                                 {
                                     xtype: 'button',
-                                    text: 'MyButton',
+                                    text: 'Add Section',
                                     listeners: {
                                         click: {
                                             fn: me.onButtonClick,
@@ -63,7 +63,13 @@ Ext.define('Writer.view.MainView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    text: 'MyButton'
+                                    text: 'Preview',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onPreviewClick,
+                                            scope: me
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -140,6 +146,15 @@ Ext.define('Writer.view.MainView', {
                 leaf: true
             });
         }
+    },
+
+    onPreviewClick: function(button, e, eOpts) {
+        console.log("Window Closed");
+        var preview = Ext.create('Writer.view.previewWindow');
+        preview.hidden = false;
+        preview.show();
+        console.log("Window Open");
+
     },
 
     onCellEditingEdit: function(editor, e, eOpts) {

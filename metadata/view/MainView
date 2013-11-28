@@ -64,7 +64,7 @@
                             "codeClass": null,
                             "userConfig": {
                                 "layout|flex": null,
-                                "text": "MyButton"
+                                "text": "Add Section"
                             },
                             "designerId": "cdb359e7-1366-4df6-8a30-58a148b40cab",
                             "cn": [
@@ -116,9 +116,33 @@
                             "codeClass": null,
                             "userConfig": {
                                 "layout|flex": null,
-                                "text": "MyButton"
+                                "text": "Preview"
                             },
-                            "designerId": "14a70045-ea88-493b-9401-ac3c18f47e67"
+                            "designerId": "14a70045-ea88-493b-9401-ac3c18f47e67",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onPreviewClick",
+                                        "implHandler": [
+                                            "console.log(\"Window Closed\");\r",
+                                            "var preview = Ext.create('Writer.view.previewWindow');\r",
+                                            "preview.hidden = false;\r",
+                                            "preview.show();\r",
+                                            "console.log(\"Window Open\");\r",
+                                            ""
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "6f0dc692-4e32-4f4e-963a-5d20e25d3257"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -243,7 +267,7 @@
                         "fn": "onProjectTreeSelect",
                         "implHandler": [
                             "if(record.raw.leaf === true)\r",
-                            "{ \r",
+                            "{\r",
                             "    console.log(record.raw.name);\r",
                             "    Ext.getCmp('projectEditor').setValue(record.raw.name);\r",
                             "}"
