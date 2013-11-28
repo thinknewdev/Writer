@@ -1,18 +1,28 @@
 {
-    "success": true, 
-    "Root": [
+    "divisions": [
           {
             "name": "Chapters",
-            "leaf": true,
-            "element": 1
+            "leaf": false,
+            "divisions": [
+                {
+                    "name": "Chapter 1",
+                    "leaf": true
+                 },{
+                    "name": "Chapter 2",
+                    "leaf": true
+                 },{
+                    "name": "Chapter 3",
+                    "leaf": true
+                 }
+            ]
          },{
             "name": "Characters",
-            "leaf": true,
-            "element": 2
+            "leaf": false,
+            "divisions": []
          },{
             "name": "Settings",
-            "leaf": true,
-            "element": 3
+            "leaf": false,
+            "divisions": []
          }
     ]
 }

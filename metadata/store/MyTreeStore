@@ -7,6 +7,7 @@
     "codeClass": null,
     "userConfig": {
         "autoLoad": true,
+        "defaultRootText": "divisions",
         "designer|userClassName": "MyTreeStore",
         "model": "StoryModel",
         "storeId": "MyTreeStore"
@@ -33,11 +34,25 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "root": "Root"
+                        "root": "divisions"
                     },
                     "designerId": "fa57142c-1b27-4a2c-a41e-b4f1338a9e69"
                 }
             ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTreeStoreLoad",
+                "name": "load",
+                "scope": "me"
+            },
+            "designerId": "4043e111-8642-4b04-8d2e-17fddde0630a"
         }
     ]
 }

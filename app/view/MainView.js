@@ -16,6 +16,10 @@
 Ext.define('Writer.view.MainView', {
     extend: 'Ext.container.Viewport',
 
+    requires: [
+        'Ext.grid.plugin.CellEditing'
+    ],
+
     itemId: 'mainView',
     layout: {
         type: 'border'
@@ -37,7 +41,8 @@ Ext.define('Writer.view.MainView', {
                     items: [
                         {
                             xtype: 'htmleditor',
-                            height: 150
+                            height: 150,
+                            id: 'projectEditor'
                         }
                     ],
                     dockedItems: [
@@ -59,10 +64,6 @@ Ext.define('Writer.view.MainView', {
                                 {
                                     xtype: 'button',
                                     text: 'MyButton'
-                                },
-                                {
-                                    xtype: 'button',
-                                    text: 'MyButton'
                                 }
                             ]
                         }
@@ -78,21 +79,38 @@ Ext.define('Writer.view.MainView', {
                     store: 'MyTreeStore',
                     rootVisible: false,
                     viewConfig: {
-                        listeners: {
-                            select: {
-                                fn: me.onViewSelect,
-                                scope: me
-                            }
-                        }
+                        rootVisible: false
                     },
                     columns: [
                         {
                             xtype: 'treecolumn',
-                            width: 148,
-                            defaultWidth: 149,
-                            dataIndex: 'name'
+                            width: 149,
+                            dataIndex: 'name',
+                            editor: {
+                                xtype: 'textfield'
+                            }
                         }
-                    ]
+                    ],
+                    plugins: [
+                        Ext.create('Ext.grid.plugin.CellEditing', {
+                            listeners: {
+                                edit: {
+                                    fn: me.onCellEditingEdit,
+                                    scope: me
+                                },
+                                beforeedit: {
+                                    fn: me.onCellEditingBeforeEdit,
+                                    scope: me
+                                }
+                            }
+                        })
+                    ],
+                    listeners: {
+                        select: {
+                            fn: me.onProjectTreeSelect,
+                            scope: me
+                        }
+                    }
                 }
             ]
         });
@@ -101,22 +119,50 @@ Ext.define('Writer.view.MainView', {
     },
 
     onButtonClick: function(button, e, eOpts) {
-        var treeNode = projectTree.getRootNode();
-        treeNode.expandChildren(true); // Optional: To see what happens
-        treeNode.appendChild({
-                name: 'Child 4',
-                leaf: true,
-                element : 6
-        });
-        treeNode.getChildAt(2).getChildAt(0).appendChild({
-                name: 'Grand Child 3',
-                leaf: true,
-                element: 7
-        });
+        // Get Tree
+        var tree = Ext.getCmp('projectTree');
+
+        // Get Tree Root Node
+        var treeNode = Ext.getCmp('projectTree').getRootNode();
+
+        // Get Selected Node of Tree
+        var selected_node = tree.getSelectionModel().getSelection()[0];
+
+        // Check if Node is leaf
+        if(selected_node.raw.leaf === true)
+        {
+            // If leaf == true, Can't add
+            alert("Can't add");
+        } else {
+            // If leaf is not true, Add child node
+            selected_node.appendChild({
+                name: 'New Leaf',
+                leaf: true
+            });
+        }
     },
 
-    onViewSelect: function(dataviewmodel, record, eOpts) {
+    onCellEditingEdit: function(editor, e, eOpts) {
+        alert('edited');
+        console.log(e.record);
+    },
 
+    onCellEditingBeforeEdit: function(editor, e, eOpts) {
+        if(e.record.raw.leaf === true)
+        {
+
+        } else {
+            console.log(e.record.raw.name);
+            editor.cancel();
+        }
+    },
+
+    onProjectTreeSelect: function(rowmodel, record, index, eOpts) {
+        if(record.raw.leaf === true)
+        {
+            console.log(record.raw.name);
+            Ext.getCmp('projectEditor').setValue(record.raw.name);
+        }
     }
 
 });

@@ -37,7 +37,8 @@
                     "codeClass": null,
                     "userConfig": {
                         "fieldLabel": null,
-                        "height": 150
+                        "height": 150,
+                        "id": "projectEditor"
                     },
                     "designerId": "6d66d23f-d3b3-4ffa-9f51-33bd3f688c62"
                 },
@@ -77,18 +78,27 @@
                                     "userConfig": {
                                         "fn": "onButtonClick",
                                         "implHandler": [
-                                            "var treeNode = projectTree.getRootNode();\r",
-                                            "treeNode.expandChildren(true); // Optional: To see what happens\r",
-                                            "treeNode.appendChild({\r",
-                                            "        name: 'Child 4',\r",
-                                            "        leaf: true,\r",
-                                            "        element : 6\r",
-                                            "});\r",
-                                            "treeNode.getChildAt(2).getChildAt(0).appendChild({\r",
-                                            "        name: 'Grand Child 3',\r",
-                                            "        leaf: true,\r",
-                                            "        element: 7\r",
-                                            "});"
+                                            "// Get Tree\r",
+                                            "var tree = Ext.getCmp('projectTree');\r",
+                                            "\r",
+                                            "// Get Tree Root Node\r",
+                                            "var treeNode = Ext.getCmp('projectTree').getRootNode();\r",
+                                            "\r",
+                                            "// Get Selected Node of Tree\r",
+                                            "var selected_node = tree.getSelectionModel().getSelection()[0];\r",
+                                            "\r",
+                                            "// Check if Node is leaf\r",
+                                            "if(selected_node.raw.leaf === true)\r",
+                                            "{\r",
+                                            "    // If leaf == true, Can't add\r",
+                                            "    alert(\"Can't add\");\r",
+                                            "} else {\r",
+                                            "    // If leaf is not true, Add child node\r",
+                                            "    selected_node.appendChild({\r",
+                                            "        name: 'New Leaf',\r",
+                                            "        leaf: true\r",
+                                            "    });\r",
+                                            "}"
                                         ],
                                         "name": "click",
                                         "scope": "me"
@@ -109,19 +119,6 @@
                                 "text": "MyButton"
                             },
                             "designerId": "14a70045-ea88-493b-9401-ac3c18f47e67"
-                        },
-                        {
-                            "type": "Ext.button.Button",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "layout|flex": null,
-                                "text": "MyButton"
-                            },
-                            "designerId": "cbcf36b3-b32c-4f89-a652-43faf665db05"
                         }
                     ]
                 }
@@ -153,28 +150,10 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "designer|displayName": null
+                        "designer|displayName": null,
+                        "rootVisible": false
                     },
-                    "designerId": "b478f021-3b0b-405d-9b28-9adb65ad10a6",
-                    "cn": [
-                        {
-                            "type": "basiceventbinding",
-                            "reference": {
-                                "name": "listeners",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fn": "onViewSelect",
-                                "implHandler": [
-                                    ""
-                                ],
-                                "name": "select",
-                                "scope": "me"
-                            },
-                            "designerId": "bb2980e2-8c9f-410c-847f-0f28f0efa443"
-                        }
-                    ]
+                    "designerId": "b478f021-3b0b-405d-9b28-9adb65ad10a6"
                 },
                 {
                     "type": "Ext.tree.Column",
@@ -185,11 +164,94 @@
                     "codeClass": null,
                     "userConfig": {
                         "dataIndex": "name",
-                        "defaultWidth": 149,
                         "text": null,
-                        "width": 148
+                        "width": 149
                     },
-                    "designerId": "1b23c8e2-4260-48e3-841b-66f4e0e675ec"
+                    "designerId": "6b954623-f5a9-4002-9caa-191b7f4de084",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "editor",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "fc7a4ab6-365b-4aba-9762-b864ab07ddef"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.plugin.CellEditing",
+                    "reference": {
+                        "name": "plugins",
+                        "type": "array"
+                    },
+                    "codeClass": "Ext.grid.plugin.CellEditing",
+                    "designerId": "ced0fe57-d146-4ae8-9e3e-29684f8e8dd5",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onCellEditingEdit",
+                                "implHandler": [
+                                    "alert('edited');\r",
+                                    "console.log(e.record);"
+                                ],
+                                "name": "edit",
+                                "scope": "me"
+                            },
+                            "designerId": "ab3ff0cb-31bf-4e7e-a807-143edb7da4b3"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onCellEditingBeforeEdit",
+                                "implHandler": [
+                                    "if(e.record.raw.leaf === true)\r",
+                                    "{\r",
+                                    "    \r",
+                                    "} else {\r",
+                                    "    console.log(e.record.raw.name);\r",
+                                    "    editor.cancel();\r",
+                                    "}"
+                                ],
+                                "name": "beforeedit",
+                                "scope": "me"
+                            },
+                            "designerId": "a30bcfc7-3d86-43e8-ab03-b2be9e713dc0"
+                        }
+                    ]
+                },
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onProjectTreeSelect",
+                        "implHandler": [
+                            "if(record.raw.leaf === true)\r",
+                            "{ \r",
+                            "    console.log(record.raw.name);\r",
+                            "    Ext.getCmp('projectEditor').setValue(record.raw.name);\r",
+                            "}"
+                        ],
+                        "name": "select",
+                        "scope": "me"
+                    },
+                    "designerId": "094e5ddc-6b72-407f-85e6-2ce5da6b787c"
                 }
             ]
         }

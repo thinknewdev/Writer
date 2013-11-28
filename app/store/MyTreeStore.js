@@ -29,14 +29,26 @@ Ext.define('Writer.store.MyTreeStore', {
             autoLoad: true,
             model: 'Writer.model.StoryModel',
             storeId: 'MyTreeStore',
+            defaultRootText: 'divisions',
             proxy: {
                 type: 'ajax',
                 url: 'data/solitude.json',
                 reader: {
                     type: 'json',
-                    root: 'Root'
+                    root: 'divisions'
+                }
+            },
+            listeners: {
+                load: {
+                    fn: me.onTreeStoreLoad,
+                    scope: me
                 }
             }
         }, cfg)]);
+    },
+
+    onTreeStoreLoad: function(treestore, node, records, successful, eOpts) {
+
     }
+
 });
