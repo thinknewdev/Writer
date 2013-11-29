@@ -24,6 +24,7 @@ Ext.define('Writer.view.previewWindow', {
         type: 'fit'
     },
     title: 'My Window',
+    modal: true,
 
     initComponent: function() {
         var me = this;

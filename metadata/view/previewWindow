@@ -11,6 +11,7 @@
         "hidden": false,
         "id": "previewWindow",
         "layout": "fit",
+        "modal": true,
         "title": "My Window",
         "width": 900
     },

@@ -29,13 +29,13 @@ Ext.define('Writer.store.MyTreeStore', {
             autoLoad: true,
             model: 'Writer.model.StoryModel',
             storeId: 'MyTreeStore',
-            defaultRootText: 'divisions',
+            defaultRootText: 'children',
             proxy: {
                 type: 'ajax',
                 url: 'data/solitude.json',
                 reader: {
                     type: 'json',
-                    root: 'divisions'
+                    root: 'children'
                 }
             },
             listeners: {

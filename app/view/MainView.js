@@ -53,6 +53,8 @@ Ext.define('Writer.view.MainView', {
                             items: [
                                 {
                                     xtype: 'button',
+                                    hidden: true,
+                                    id: 'addSection',
                                     text: 'Add Section',
                                     listeners: {
                                         click: {
@@ -63,6 +65,8 @@ Ext.define('Writer.view.MainView', {
                                 },
                                 {
                                     xtype: 'button',
+                                    defaultAlign: 'tr',
+                                    menuAlign: 'tr',
                                     text: 'Preview',
                                     listeners: {
                                         click: {
@@ -146,12 +150,14 @@ Ext.define('Writer.view.MainView', {
                 leaf: true
             });
         }
+        writeJsonFile();
     },
 
     onPreviewClick: function(button, e, eOpts) {
         console.log("Window Closed");
         var preview = Ext.create('Writer.view.previewWindow');
         preview.hidden = false;
+        preview.html = Ext.getCmp('projectEditor').getValue();
         preview.show();
         console.log("Window Open");
 
@@ -160,6 +166,7 @@ Ext.define('Writer.view.MainView', {
     onCellEditingEdit: function(editor, e, eOpts) {
         alert('edited');
         console.log(e.record);
+        writeJsonFile();
     },
 
     onCellEditingBeforeEdit: function(editor, e, eOpts) {
@@ -173,10 +180,25 @@ Ext.define('Writer.view.MainView', {
     },
 
     onProjectTreeSelect: function(rowmodel, record, index, eOpts) {
+        //Check to See if the record is a leaf
         if(record.raw.leaf === true)
         {
+            /*
+                Node is a Leaf, meaning it is editable in our editor and not able to add other nodes
+            */
+
+            //Show Node Name value in console
             console.log(record.raw.name);
+
+            // Set Our Editor
             Ext.getCmp('projectEditor').setValue(record.raw.name);
+
+            // Hide Button for adding other sections
+            Ext.getCmp('addSection').hide();
+        } else {
+
+            //Show button for adding section to node
+            Ext.getCmp('addSection').show();
         }
     }
 
